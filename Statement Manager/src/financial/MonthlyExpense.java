@@ -15,6 +15,14 @@ public class MonthlyExpense implements Serializable {
 
     public MonthlyExpense(List<BigDecimal> personalExpenses, List<BigDecimal> foodExpenses, List<BigDecimal> entertainmentExpenses, 
     List<BigDecimal> transportationExpenses, List<BigDecimal> groceryExpenses) {
+        this.personalExpenses = new ArrayList<>(personalExpenses);
+        this.foodExpenses = new ArrayList<>(foodExpenses);
+        this.entertainmentExpenses = new ArrayList<>(entertainmentExpenses);
+        this.transportationExpenses = new ArrayList<>(transportationExpenses);
+        this.groceryExpenses = new ArrayList<>(groceryExpenses);
+    }
+
+    public MonthlyExpense() {
         this.personalExpenses = new ArrayList<>();
         this.foodExpenses = new ArrayList<>();
         this.entertainmentExpenses = new ArrayList<>();
