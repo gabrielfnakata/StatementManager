@@ -4,14 +4,14 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 
 public class ReadFile {
     
-    public static MonthlyExpense readFile(String path) {
+    public static MonthlyExpense readFile(Path path) {
         MonthlyExpense monthlyExpense = null;
         
-        try(ObjectInputStream input = new ObjectInputStream(Files.newInputStream(Paths.get(path)))) {
+        try(ObjectInputStream input = new ObjectInputStream(Files.newInputStream(path))) {
             monthlyExpense = (MonthlyExpense) input.readObject();
         }
         catch(EOFException endOfFileException) {

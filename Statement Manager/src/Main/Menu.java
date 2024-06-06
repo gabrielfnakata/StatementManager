@@ -18,6 +18,28 @@ public class Menu {
     private static Scanner input = new Scanner(System.in);
     private static Path road;
 
+    public static void main(String[] args) {
+        int option = 0;
+
+        while(option != 3) {
+            showMenu();
+            requestInput();
+
+            switch(option) {
+                case 1:
+                showFiles();
+                registerFinance();
+                break;
+                case 2:
+                showFiles();
+                readingExistingFile();
+                break;
+                default:
+                System.out.printf("%n%s", (option == 3) ? "Closing program." : "Insert a valid input.");
+            }
+        }
+    }
+
     public static void showFiles() {
         try {
             road = Paths.get("Statement Manager\\monthly expenses");
@@ -81,7 +103,7 @@ public class Menu {
             road = Paths.get("Statement Manager\\monthly expenses\\" + input.nextLine());
         } while(!Files.exists(road));
         
-        WriteFile.writeFile(null, null);
+        WriteFile.writeFile(road, monthlyExpense);
     }
 
     public static List<BigDecimal> requestExpense() {
@@ -106,5 +128,50 @@ public class Menu {
         }
 
         return list;
+    }
+
+    public static void readingExistingFile() {
+        BigDecimal totalValue = BigDecimal.ZERO;
+        
+        showFiles();
+        
+        do {
+            System.out.printf("Insert a file name: ");
+            road = Paths.get("Statement Manager\\monthly expenses\\" + input.nextLine());
+        } while(!Files.exists(road));
+
+        MonthlyExpense monthlyExpense = ReadFile.readFile(road);
+        
+        System.out.print("\nPersonal Expenses:\n");
+        for(BigDecimal value : monthlyExpense.getPersonalExpenses()) {
+            System.out.printf("- %.2f%n", value);
+            totalValue = totalValue.add(value);
+        }
+        
+        System.out.print("\nFood Expenses:\n");
+        for(BigDecimal value : monthlyExpense.getFoodExpenses()) {
+            System.out.printf("- %.2f%n", value);
+            totalValue = totalValue.add(value);
+        }
+
+        System.out.print("\nEntertainment Expenses:\n");
+        for(BigDecimal value : monthlyExpense.getEntertainmentExpenses()) {
+            System.out.printf("- %.2f%n", value);
+            totalValue = totalValue.add(value);
+        }
+
+        System.out.print("\nTransportation Expenses:\n");
+        for(BigDecimal value : monthlyExpense.getTransportationExpenses()) {
+            System.out.printf("- %.2f%n", value);
+            totalValue = totalValue.add(value);
+        }
+
+        System.out.print("\nGrocery Expenses:\n");
+        for(BigDecimal value : monthlyExpense.getGroceryExpenses()) {
+            System.out.printf("- %.2f%n", value);
+            totalValue = totalValue.add(value);
+        }
+        
+        System.out.printf("%nTotal Expenses: %.2f", totalValue);
     }
 }

@@ -34,39 +34,39 @@ public class MonthlyExpense implements Serializable {
         return personalExpenses;
     }
 
-    public void addPersonalExpenses(BigDecimal p) {
-        getPersonalExpenses().add(p);
+    public void addPersonalExpenses(List<BigDecimal> p) {
+        getPersonalExpenses().addAll(p);
     }
 
     public List<BigDecimal> getFoodExpenses() {
         return foodExpenses;
     }
 
-    public void addFoodExpenses(BigDecimal f) {
-        getFoodExpenses().add(f);
+    public void addFoodExpenses(List<BigDecimal> f) {
+        getFoodExpenses().addAll(f);
     }
 
     public List<BigDecimal> getEntertainmentExpenses() {
         return entertainmentExpenses;
     }
 
-    public void addEntertainmentExpenses(BigDecimal e) {
-        getEntertainmentExpenses().add(e);
+    public void addEntertainmentExpenses(List<BigDecimal> e) {
+        getEntertainmentExpenses().addAll(e);
     }
 
     public List<BigDecimal> getTransportationExpenses() {
         return transportationExpenses;
     }
 
-    public void addTransportationExpenses(BigDecimal t) {
-        getTransportationExpenses().add(t);
+    public void addTransportationExpenses(List<BigDecimal> t) {
+        getTransportationExpenses().addAll(t);
     }
 
     public List<BigDecimal> getGroceryExpenses() {
         return groceryExpenses;
     }
 
-    public void addGroceryExpenses(BigDecimal g) {
-        getGroceryExpenses().add(g);
+    public void addGroceryExpenses(List<BigDecimal> g) {
+        getGroceryExpenses().addAll(g);
     }
 }
