@@ -1,16 +1,16 @@
 package financial;
 
-import java.io.IOException; 
-import java.io.ObjectOutputStream;
+import java.util.Scanner;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.io.IOException; 
+import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class WriteFile {
 

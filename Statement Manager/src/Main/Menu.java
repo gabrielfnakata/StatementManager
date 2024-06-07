@@ -1,6 +1,5 @@
 package Main;
 
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.nio.file.Files;
@@ -10,8 +9,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import financial.*;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Menu {
     
@@ -27,7 +24,8 @@ public class Menu {
 
             switch(option) {
                 case 1:
-                registerFinance();
+                showFiles();
+                WriteFile.writeFile();
                 break;
                 case 2:
                 showFiles();
@@ -40,10 +38,9 @@ public class Menu {
     }
 
     public static void showFiles() {
-        try {
-            road = Paths.get("C:\\Users\\gabri\\OneDrive\\Desktop\\Statement Manager\\monthly expenses");
-            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(road);
-
+        road = Paths.get("monthly expenses");
+        
+        try(DirectoryStream<Path> directoryStream = Files.newDirectoryStream(road)) {
             System.out.printf("%nFiles:%n");
             for(Path file : directoryStream)
                 System.out.printf("- %s%n", file);   
@@ -65,7 +62,6 @@ public class Menu {
         int option = 0;
         
         while(option < 1 || option > 3) {
-
             try {
                 option = input.nextInt();
                 input.nextLine();
@@ -79,19 +75,14 @@ public class Menu {
         return option;
     }
 
-    public static void registerFinance() {
-        showFiles();
-        WriteFile.writeFile();
-    }
-
     public static void readingExistingFile() {
         BigDecimal totalValue = BigDecimal.ZERO;
         
         showFiles();
-        
         do {
             System.out.printf("Insert a file name: ");
-            road = Paths.get("Statement Manager\\monthly expenses\\" + input.nextLine());
+            String fileName = input.nextLine();
+            road = Paths.get("monthly expenses\\" + fileName + ".ser");
         } while(!Files.exists(road));
 
         MonthlyExpense monthlyExpense = ReadFile.readFile(road);
