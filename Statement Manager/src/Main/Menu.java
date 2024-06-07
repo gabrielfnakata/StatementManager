@@ -1,14 +1,14 @@
 package Main;
 
-import java.util.NoSuchElementException;
+import financial.*;
 import java.util.Scanner;
-import java.nio.file.Files;
-import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import financial.*;
-import java.math.BigDecimal;
+import java.io.IOException;
+import java.util.NoSuchElementException;
 
 public class Menu {
     
@@ -42,8 +42,10 @@ public class Menu {
         
         try(DirectoryStream<Path> directoryStream = Files.newDirectoryStream(road)) {
             System.out.printf("%nFiles:%n");
-            for(Path file : directoryStream)
-                System.out.printf("- %s%n", file);   
+            for(Path file : directoryStream) {
+                String fileName = String.valueOf(file.getFileName());
+                System.out.printf("- %s%n", fileName.replaceAll(".ser", ""));  
+            }
         }
         catch(IOException ioException) {
             System.err.println("Error: " + ioException);
