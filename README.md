@@ -10,11 +10,11 @@ This project has 4 classes:
 
 This class has 5 lists that store values for different expenses:
 
-- Personal Expenses;
-- Food Expenses;
-- Entertainment Expenses;
-- Transportation Expenses;
-- Grocery Expenses.
+1. Personal Expenses;
+2. Food Expenses;
+3. Entertainment Expenses;
+4. Transportation Expenses;
+5. Grocery Expenses.
 
 ### **WriteFile**
 
