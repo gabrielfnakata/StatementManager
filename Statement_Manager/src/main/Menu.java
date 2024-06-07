@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import financial.*;
 import java.util.Scanner;
