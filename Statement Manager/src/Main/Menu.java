@@ -23,11 +23,10 @@ public class Menu {
 
         while(option != 3) {
             showMenu();
-            requestInput();
+            option = requestInput();
 
             switch(option) {
                 case 1:
-                showFiles();
                 registerFinance();
                 break;
                 case 2:
@@ -42,7 +41,7 @@ public class Menu {
 
     public static void showFiles() {
         try {
-            road = Paths.get("Statement Manager\\monthly expenses");
+            road = Paths.get("C:\\Users\\gabri\\OneDrive\\Desktop\\Statement Manager\\monthly expenses");
             DirectoryStream<Path> directoryStream = Files.newDirectoryStream(road);
 
             System.out.printf("%nFiles:%n");
@@ -69,6 +68,7 @@ public class Menu {
 
             try {
                 option = input.nextInt();
+                input.nextLine();
             }
             catch(NoSuchElementException elementException) {
                 System.err.println("Invalid input. Please, try again.");
@@ -80,54 +80,8 @@ public class Menu {
     }
 
     public static void registerFinance() {
-        MonthlyExpense monthlyExpense = new MonthlyExpense();
-
-        System.out.printf("%nInsert your personal expenses (insert any negative number to exit):");
-        monthlyExpense.addPersonalExpenses(requestExpense());
-
-        System.out.printf("%nInsert your food expenses (insert any negative number to exit):");
-        monthlyExpense.addFoodExpenses(requestExpense());
-
-        System.out.printf("%nInsert your entertainment expenses (insert any negative number to exit):");
-        monthlyExpense.addEntertainmentExpenses(requestExpense());
-
-        System.out.printf("%nInsert your transportation expenses (insert any negative number to exit):");
-        monthlyExpense.addTransportationExpenses(requestExpense());
-
-        System.out.printf("%nInsert your grocery expenses (insert any negative number to exit):");
-        monthlyExpense.addGroceryExpenses(requestExpense());
-        
         showFiles();
-        do {
-            System.out.printf("Insert a file name: ");
-            road = Paths.get("Statement Manager\\monthly expenses\\" + input.nextLine());
-        } while(!Files.exists(road));
-        
-        WriteFile.writeFile(road, monthlyExpense);
-    }
-
-    public static List<BigDecimal> requestExpense() {
-        BigDecimal option = BigDecimal.ONE;
-        List<BigDecimal> list = new ArrayList<>();
-
-        while(option.compareTo(BigDecimal.ZERO) >= 0) {
-            try {
-                System.out.print("\n? ");
-                option = input.nextBigDecimal();
-                if(option.compareTo(BigDecimal.ZERO) > 0)
-                    list.add(option);
-            }
-            catch(InputMismatchException inputMismatchException) {
-                System.err.println("Error: " + inputMismatchException);
-                input.nextLine();
-            }
-            catch(NoSuchElementException elementException) {
-                System.err.println("Invalid input. Please, try again.");
-                input.nextLine();
-            }
-        }
-
-        return list;
+        WriteFile.writeFile();
     }
 
     public static void readingExistingFile() {
